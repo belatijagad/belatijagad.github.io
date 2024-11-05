@@ -1,12 +1,11 @@
 <script>
-    import me from '$lib/assets/me.png';
     export let id;
 </script>
 
 <section {id} class="h-screen container mx-auto">
     <div class="grid grid-cols-12 gap-8 h-full items-center">
         <div class="col-span-5">
-            <img src={me} class="rounded-lg" alt="me"/>
+            <img src="/assets/me.png" class="rounded-lg" alt="me"/>
         </div>
         <div class="col-span-7 flex flex-col justify-center gap-8">
             <h2 class="text-4xl">Here's a piece of <span class="underline decoration-amber-200">my story</span>...</h2>

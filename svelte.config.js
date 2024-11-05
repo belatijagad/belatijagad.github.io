@@ -1,22 +1,29 @@
 import { mdsvex } from 'mdsvex';
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import { sveltePreprocess } from 'svelte-preprocess'; // Named import for sveltePreprocess
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: [vitePreprocess(), mdsvex()],
+	preprocess: [
+		vitePreprocess(),
+		mdsvex(),
+		sveltePreprocess({
+			typescript: {
+				tsconfigFile: './tsconfig.json'
+			},
+		}),
+	],
 
 	kit: {
 		adapter: adapter({
-			// Set the output directory for pages and assets
 			pages: 'build',
 			assets: 'build',
-			fallback: 'index.html',  // Required for GitHub Pages to handle client-side routing
+			fallback: 'index.html', // Required for GitHub Pages to handle client-side routing
 			precompress: false
 		}),
 		paths: {
-			// No base path needed since deploying to root (belatijagad.github.io)
-			base: '',
+			base: '', // No base path needed since deploying to root (belatijagad.github.io)
 		},
 		appDir: 'app', // Keep the app directory separate
 	},
