@@ -4,16 +4,21 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://svelte.dev/docs/kit/integrations
-	// for more information about preprocessors
 	preprocess: [vitePreprocess(), mdsvex()],
 
 	kit: {
-		// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
-		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
-		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
-		appDir: 'app',
-		adapter: adapter()
+		adapter: adapter({
+			// Set the output directory for pages and assets
+			pages: 'build',
+			assets: 'build',
+			fallback: 'index.html',  // Required for GitHub Pages to handle client-side routing
+			precompress: false
+		}),
+		paths: {
+			// No base path needed since deploying to root (belatijagad.github.io)
+			base: '',
+		},
+		appDir: 'app', // Keep the app directory separate
 	},
 
 	extensions: ['.svelte', '.svx']
